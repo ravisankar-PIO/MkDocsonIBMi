@@ -15,10 +15,12 @@
 
 - 
 
-# Setup Python Virtual Environment folder
+# Install MkDocs in a python virtual environment
+- It is better to install MkDocs inside a python virtual environment. Why? Because MkDocs needed some extra python packages to run and we don't want to install them on a system level. For that purpose we'll create our own Python Sandbox a.k.a virtual environment to happily install and run MkDocs without any issues. 
+  
 - Create a new directory called `mkdocs` in your root folder (If you don't have access to root folder, then remove the '/' so that the directory will be created in your home folder itself) and navigate into it.
   ```bash
-  mkdir /mkdocs && cd/mkdocs
+  mkdir /mkdocs && cd /mkdocs
   ```
   <br>
 
