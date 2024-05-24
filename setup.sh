@@ -33,10 +33,10 @@ echo ""  # Newline after progress bar
 
 # Function to make some gap between every action
 printheading(){
+    echo -e "\n" 
     echo "==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-=="
     echo "$1"
     echo "==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-=="
-    echo -e "\n" 
 }
 
 ######################################################################
@@ -56,13 +56,25 @@ echo "export JAVA_HOME=/QOpenSys/QIBM/ProdData/JavaVM/jdk17/64bit" >> .profile
 echo "export JENKINS_HOME=/home/$USER/jenkins" >> .profile
 echo "export GITBUCKET_HOME=/home/$USER/gitbucket" >> .profile
 source ~/.profile
-echo "source ~/.gitprompt.sh" >> .profile
-###############-------------- >>> Need to add the PS1 variable change here
 
-# Download the Git Prompt from GitHub
-printheading "Download the Git Prompt from GitHub..."
+# Change the Prompt String to reflect Git Status.
+printheading "Setup the Prompt String to show Git Status..."
 wget --show-progress https://raw.githubusercontent.com/ravisankar-PIO/gitonibmi/main/gitprompt.sh
 mv gitprompt.sh .gitprompt.sh
+echo "PROMPT_COMMAND='__posh_git_ps1 \"\${VIRTUAL_ENV:+(\`basename \$VIRTUAL_ENV\`)}\\[\\e[32m\\]\\u\\[\\e[0m\\]@\\h:\\[\\e[33m\\]\\w\\[\\e[0m\\] \" \"\\\\\\\$ \";'\$PROMPT_COMMAND" >> .profile
+echo "source ~/.gitprompt.sh" >> .profile
+source ~/.profile
+# PROMPT_COMMAND='__posh_git_ps1 "${VIRTUAL_ENV:+(`basename $VIRTUAL_ENV`)}\[\e[32m\]\u\[\e[0m\]@\h:\[\e[33m\]\w\[\e[0m\] " "\\\$ ";'$PROMPT_COMMAND
+
+# PROMPT_COMMAND='__posh_git_ps1 "${VIRTUAL_ENV:+(`basename $VIRTUAL_ENV`)}\[\e[32m\]\u\[\e[0m\]@\h:\[\e[33m\]\w\[\e[0m\] " "\\\$ ";'$PROMPT_COMMAND
+
+# PROMPT_COMMAND='__posh_git_ps1 "${VIRTUAL_ENV:+(`basename $VIRTUAL_ENV`)}\\[\e[32m\\]\u\\[\e[0m\\]@\h:\\[\e[33m\\]\w\\[\e[0m\\] " "\\\$ ";'$PROMPT_COMMAND
+
+#"PROMPT_COMMAND='__posh_git_ps1 \"\${VIRTUAL_ENV:+(\`basename \$VIRTUAL_ENV\`)}\\[\\e[32m\\]\\u\\[\\e[0m\\]@\\h:\\[\\e[33m\\]\\w\\[\\e[0m\\] \" \"\\\\\\\$ \";'\$PROMPT_COMMAND" > filename
+
+# echo "PROMPT_COMMAND='__posh_git_ps1 \"\${VIRTUAL_ENV:+(\`basename \$VIRTUAL_ENV\`)}\\[\\e[32m\\]\\u\\[\\e[0m\\]@\\h:\\[\\e[33m\\]\\w\\[\\e[0m\\] \" \"\\\\\\\$ \";'\$PROMPT_COMMAND" > file
+
+
 
 # Update and upgrade the open source packages
 printheading "Update the yum repository and existing packages..."
