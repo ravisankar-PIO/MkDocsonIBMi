@@ -34,13 +34,10 @@ show_progress(){
 
 # Function to make some gap between every action
 printheading(){
-  for i in {1..2}
-  do
     echo "==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-=="
-    if [ $i -lt 2 ]; then
-        echo -e "\n\n"
-    fi
-  done
+    echo "$1"
+    echo "==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-=="
+    echo -e "\n" 
 }
 
 ######################################################################
@@ -49,11 +46,10 @@ printheading(){
 
 # Set bash as the default shell.
 /QOpenSys/pkgs/bin/chsh -s /QOpenSys/pkgs/bin/bash $USER
-echo "Changed the default shell to bash..."
-printheading
+printheading "Changed the default shell to bash..."
 
 # create a .profile file in your home folder to store the environment variables.
-echo "Setup the environment variables..."
+printheading "Setup the environment variables..."
 show_progress 5
 cd ~
 echo "export PATH=/QOpenSys/pkgs/bin:$PATH" >> .profile
@@ -62,43 +58,42 @@ echo "export JENKINS_HOME=/home/$USER/jenkins" >> .profile
 echo "export GITBUCKET_HOME=/home/$USER/gitbucket" >> .profile
 source ~/.profile
 echo "source ~/.gitprompt.sh" >> .profile
-printheading
 ###############-------------- >>> Need to add the PS1 variable change here
 
 # Download the Git Prompt from GitHub
-echo "Download the Git Prompt from GitHub..."
+printheading "Download the Git Prompt from GitHub..."
 wget --show-progress https://raw.githubusercontent.com/ravisankar-PIO/gitonibmi/main/gitprompt.sh
 mv gitprompt.sh .gitprompt.sh
-printheading
 
 # Update and upgrade the open source packages
-echo "update the yum repository and existing packages..."
+printheading "Update the yum repository and existing packages..."
 yum update -y  && yum upgrade -y 
-printheading
 
 # Install GIT
-echo "Install GIT..."
+printheading "Install GIT..."
 yum install git -y
 git config --global user.name 'Ravisankar Pandian' 
 git config --global user.email ravisankar.pandian@programmers.io
+
+# Generate SSH Keys
+printheading "Generate SSH Keypairs..."
 ssh-keygen -t ed25519 -C "ravisankar.pandian@programmers.io" -f ~/.ssh/id_ed25519 -N ""
-printheading
 
 # Download Jenkins
 mkdir -p ~/jenkins
 cd ~/jenkins
-echo "Download Jenkins..."
+printheading "Download Jenkins..."
 wget --show-progress http://mirrors.jenkins.io/war-stable/latest/jenkins.war
-printheading
 
 # Download GitBucket
 mkdir -p ~/gitbucket
 cd ~/gitbucket
+printheading "Download GitBucket..."
 wget --show-progress https://github.com/gitbucket/gitbucket/releases/download/4.40.0/gitbucket.war
-printheading
+
 
 # Install Service Commander
-echo "Install Service Commander..."
+printheading "Install Service Commander..."
 yum install service-commander -y
 
 echo -e "\n\n"
