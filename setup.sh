@@ -56,7 +56,7 @@ echo "source ~/.gitprompt.sh" >> .profile
 
 # Download the Git Prompt from GitHub
 echo "Download the Git Prompt from GitHub..."
-wget --show-progress https://github.com/ravisankar-PIO/gitonibmi/blob/main/gitprompt.sh
+wget --show-progress https://raw.githubusercontent.com/ravisankar-PIO/gitonibmi/blob/main/gitprompt.sh
 mv gitprompt.sh .gitprompt.sh
 
 
@@ -85,4 +85,10 @@ wget --show-progress https://github.com/gitbucket/gitbucket/releases/download/4.
 
 # Install Service Commander
 echo "Install Service Commander..."
-yum -v install service-commander -y
+yum install service-commander -y
+
+
+echo -e '|============================================================|'
+echo -e '| Initial setup for Bash Prompt, Git, Service-commander and  |'
+echo -e "|                    GitBucket are completed!                |"
+echo -e '|============================================================|'
