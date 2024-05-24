@@ -9,8 +9,6 @@
 
 # Function to print the progress bar characters.
 progress_bar() {
-    # $1 is the total work
-    # $2 is the work done so far
     local total_work=$1
     local work_done=$2
     local progress=$((work_done*20/total_work))  # 20 because 100/5=20
@@ -20,17 +18,18 @@ progress_bar() {
 }
 
 # Function to show the progress bar
-show_progress(){
-  total_work=$1
-  echo "doing it at $1 %"
-  for i in $(seq 1 $total_work); do
-      # Simulate some work with sleep
-      sleep 0.005
-      progress_bar $total_work $i
-  done
-  echo ""  # Newline after progress bar
-
+showProgress(){
+total_work=$1
+work_done=0
+while [ $work_done -lt $total_work ]; do
+    # Simulate some work with sleep
+    sleep 0.1
+    work_done=$((work_done+1))
+    progress_bar $total_work $work_done
+done
+echo ""  # Newline after progress bar
 }
+
 
 # Function to make some gap between every action
 printheading(){
@@ -50,7 +49,7 @@ printheading "Changed the default shell to bash..."
 
 # create a .profile file in your home folder to store the environment variables.
 printheading "Setup the environment variables..."
-show_progress 5
+showProgress 10
 cd ~
 echo "export PATH=/QOpenSys/pkgs/bin:$PATH" >> .profile
 echo "export JAVA_HOME=/QOpenSys/QIBM/ProdData/JavaVM/jdk17/64bit" >> .profile
