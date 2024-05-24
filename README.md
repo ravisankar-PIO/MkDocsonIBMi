@@ -5,7 +5,7 @@
 ><h3> Table of Contents 
 </h3>
 
-
+#PROMPT_COMMAND='__posh_git_ps1 "${VIRTUAL_ENV:+(`basename $VIRTUAL_ENV`)}\[\e[32m\]\u\[\e[0m\]@\h:\[\e[33m\]\w\[\e[0m\] " "\\\$ ";'$PROMPT_COMMANDexport PATH=/QOpenSys/pkgs/bin:/QOpenSys/pkgs/bin:/QOpenSys/usr/bin:/usr/ccs/bin:/QOpenSys/usr/bin/X11:/usr/sbin:.:/usr/bin
 # Pre-Requisites
 - Install gcc*, python and it's related packages using the below command
   ```bash
