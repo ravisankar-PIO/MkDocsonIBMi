@@ -7,6 +7,7 @@
 # Copyright     : Programmers.io
 # ------------------------------------------------------------------------- #
 
+# Function to print the progress bar characters.
 progress_bar() {
     # $1 is the total work
     # $2 is the work done so far
@@ -18,6 +19,7 @@ progress_bar() {
     printf "|%s%s| %s%%\r" "${filled_part// /#}" "${empty_part}" "$((work_done*100/total_work))"
 }
 
+# Function to show the progress bar
 show_progress(){
   total_work=$1
   echo "doing it at $1 %"
@@ -31,6 +33,9 @@ show_progress(){
 }
 
 
+######################################################################
+########## MAIN LOGIC ###########################################
+######################################################################
 
 # Set bash as the default shell.
 /QOpenSys/pkgs/bin/chsh -s /QOpenSys/pkgs/bin/bash $USER
@@ -44,33 +49,39 @@ echo "export PATH=/QOpenSys/pkgs/bin:$PATH" >> .profile
 echo "export JAVA_HOME=/QOpenSys/QIBM/ProdData/JavaVM/jdk17/64bit" >> .profile
 echo "export JENKINS_HOME=/home/$USER/jenkins" >> .profile
 echo "export GITBUCKET_HOME=/home/$USER/gitbucket" >> .profile
+source ~/.profile
 echo "source ~/.gitprompt.sh" >> .profile
 
 ###############-------------- >>> Need to add the PS1 variable change here
 
 # Download the Git Prompt from GitHub
-echo "Download the Git Promt from GitHub..."
-wget -v https://github.com/ravisankar-PIO/gitonibmi/blob/main/gitprompt.sh -o .gitprompt.sh
+echo "Download the Git Prompt from GitHub..."
+wget --show-progress https://github.com/ravisankar-PIO/gitonibmi/blob/main/gitprompt.sh
+mv gitprompt.sh .gitprompt.sh
 
 
-# Update and upgrade the YUM
+# Update and upgrade the open source packages
 echo "update the yum repository and existing packages..."
-yum -v update -y  && yum -v upgrade -y 
+yum update -y  && yum upgrade -y 
 
 
 # Install GIT
 echo "Install GIT..."
-yum -v install git -y
+yum install git -y
 git config --global user.name 'Ravisankar Pandian' 
 git config --global user.email ravisankar.pandian@programmers.io
-ssh-keygen -t ed25519 -C "ravisankar.pandian@programmers.io"
+ssh-keygen -t ed25519 -C "ravisankar.pandian@programmers.io" -f ~/.ssh/id_ed25519 -N ""
 
-##############################################################################
-
-# Install Jenkins
-mkdir ~/jenkinss
+# Download Jenkins
+mkdir -p ~/jenkins
+cd ~/jenkins
 echo "Download Jenkins..."
-wget -v http://mirrors.jenkins.io/war-stable/latest/jenkins.war -o ~/jenkinss/jenkins.war
+wget --show-progress http://mirrors.jenkins.io/war-stable/latest/jenkins.war
+
+# Download GitBucket
+mkdir -p ~/gitbucket
+cd ~/gitbucket
+wget --show-progress https://github.com/gitbucket/gitbucket/releases/download/4.40.0/gitbucket.war
 
 # Install Service Commander
 echo "Install Service Commander..."
