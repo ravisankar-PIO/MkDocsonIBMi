@@ -23,7 +23,7 @@ total_work=$1
 work_done=0
 while [ $work_done -lt $total_work ]; do
     # Simulate some work with sleep
-    sleep 0.1
+    /QOpenSys/pkgs/bin/sleep 0.1
     work_done=$((work_done+1))
     progress_bar $total_work $work_done
 done
@@ -39,15 +39,17 @@ printheading(){
     echo "==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-=="
 }
 
-######################################################################
-########## MAIN LOGIC ###########################################
-######################################################################
+# ==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==
+#                  MAIN LOGIC # ==-==-==-==-==-==-==-==-==-==-==-==-==-==
+# ==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==
 
 # Set bash as the default shell.
 /QOpenSys/pkgs/bin/chsh -s /QOpenSys/pkgs/bin/bash $USER
 printheading "Changed the default shell to bash..."
 
+# ==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==
 # create a .profile file in your home folder to store the environment variables.
+# ==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==
 printheading "Setup the environment variables..."
 showProgress 10
 cd ~
@@ -57,59 +59,64 @@ echo "export JENKINS_HOME=/home/$USER/jenkins" >> .profile
 echo "export GITBUCKET_HOME=/home/$USER/gitbucket" >> .profile
 source ~/.profile
 
+# ==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==
 # Change the Prompt String to reflect Git Status.
+# ==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==
 printheading "Setup the Prompt String to show Git Status..."
 wget --show-progress https://raw.githubusercontent.com/ravisankar-PIO/gitonibmi/main/gitprompt.sh
 mv gitprompt.sh .gitprompt.sh
 echo "PROMPT_COMMAND='__posh_git_ps1 \"\${VIRTUAL_ENV:+(\`basename \$VIRTUAL_ENV\`)}\\[\\e[32m\\]\\u\\[\\e[0m\\]@\\h:\\[\\e[33m\\]\\w\\[\\e[0m\\] \" \"\\\\\\\$ \";'\$PROMPT_COMMAND" >> .profile
 echo "source ~/.gitprompt.sh" >> .profile
 source ~/.profile
-# PROMPT_COMMAND='__posh_git_ps1 "${VIRTUAL_ENV:+(`basename $VIRTUAL_ENV`)}\[\e[32m\]\u\[\e[0m\]@\h:\[\e[33m\]\w\[\e[0m\] " "\\\$ ";'$PROMPT_COMMAND
 
-# PROMPT_COMMAND='__posh_git_ps1 "${VIRTUAL_ENV:+(`basename $VIRTUAL_ENV`)}\[\e[32m\]\u\[\e[0m\]@\h:\[\e[33m\]\w\[\e[0m\] " "\\\$ ";'$PROMPT_COMMAND
-
-# PROMPT_COMMAND='__posh_git_ps1 "${VIRTUAL_ENV:+(`basename $VIRTUAL_ENV`)}\\[\e[32m\\]\u\\[\e[0m\\]@\h:\\[\e[33m\\]\w\\[\e[0m\\] " "\\\$ ";'$PROMPT_COMMAND
-
-#"PROMPT_COMMAND='__posh_git_ps1 \"\${VIRTUAL_ENV:+(\`basename \$VIRTUAL_ENV\`)}\\[\\e[32m\\]\\u\\[\\e[0m\\]@\\h:\\[\\e[33m\\]\\w\\[\\e[0m\\] \" \"\\\\\\\$ \";'\$PROMPT_COMMAND" > filename
-
-# echo "PROMPT_COMMAND='__posh_git_ps1 \"\${VIRTUAL_ENV:+(\`basename \$VIRTUAL_ENV\`)}\\[\\e[32m\\]\\u\\[\\e[0m\\]@\\h:\\[\\e[33m\\]\\w\\[\\e[0m\\] \" \"\\\\\\\$ \";'\$PROMPT_COMMAND" > file
-
-
-
+# ==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==
 # Update and upgrade the open source packages
+# ==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==
 printheading "Update the yum repository and existing packages..."
 yum update -y  && yum upgrade -y 
 
+# ==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==
 # Install GIT
+# ==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==
 printheading "Install GIT..."
 yum install git -y
 git config --global user.name 'Ravisankar Pandian' 
 git config --global user.email ravisankar.pandian@programmers.io
 
+# ==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==
 # Generate SSH Keys
+# ==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==
 printheading "Generate SSH Keypairs..."
 ssh-keygen -t ed25519 -C "ravisankar.pandian@programmers.io" -f ~/.ssh/id_ed25519 -N ""
 
+# ==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==
 # Download Jenkins
+# ==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==
 mkdir -p ~/jenkins
 cd ~/jenkins
 printheading "Download Jenkins..."
 wget --show-progress http://mirrors.jenkins.io/war-stable/latest/jenkins.war
 
+# ==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==
 # Download GitBucket
+# ==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==
 mkdir -p ~/gitbucket
 cd ~/gitbucket
 printheading "Download GitBucket..."
 wget --show-progress https://github.com/gitbucket/gitbucket/releases/download/4.40.0/gitbucket.war
 
-
+# ==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==
 # Install Service Commander
+# ==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==
 printheading "Install Service Commander..."
 yum install service-commander -y
 
+
+scinit java -jar /home/CECUSER/jenkins.war --httpPort=9095
+
 echo -e "\n\n"
 echo -e '|============================================================|'
-echo -e '| Initial setup for Bash Prompt, Git, Service-commander and  |'
-echo -e "|                    GitBucket are completed!                |"
+echo -e '| Initial setup for Bash Prompt, Git, Service-commander,     |'
+echo -e "|             Jenkins, GitBucket are completed!              |"
 echo -e '|============================================================|'
 echo -e "\n\n"
