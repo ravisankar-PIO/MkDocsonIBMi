@@ -103,7 +103,7 @@ wget --show-progress http://mirrors.jenkins.io/war-stable/latest/jenkins.war
 mkdir -p ~/gitbucket
 cd ~/gitbucket
 printheading "Download GitBucket..."
-wget --show-progress https://github.com/gitbucket/gitbucket/releases/download/4.40.0/gitbucket.war
+wget --show-progress https://github.com/gitbucket/gitbucket/releases/download/4.41.0/gitbucket.war
 
 # ==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==
 # Install Service Commander
