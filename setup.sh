@@ -112,7 +112,7 @@ printheading "Install Service Commander..."
 yum install service-commander -y
 
 
-scinit java -jar /home/CECUSER/jenkins.war --httpPort=9095
+# scinit java -jar /home/CECUSER/jenkins.war --httpPort=9095
 
 echo -e "\n\n"
 echo -e '|============================================================|'
