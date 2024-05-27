@@ -54,9 +54,9 @@ printheading "Setup the environment variables..."
 showProgress 10
 cd ~
 echo "export PATH=/QOpenSys/pkgs/bin:$PATH" >> .profile
-echo "export JAVA_HOME=/QOpenSys/QIBM/ProdData/JavaVM/jdk17/64bit" >> .profile
-echo "export JENKINS_HOME=/home/$USER/jenkins" >> .profile
-echo "export GITBUCKET_HOME=/home/$USER/gitbucket" >> .profile
+echo "export JAVA_HOME=/QOpenSys/pkgs/lib/jvm/openjdk-11" >> .profile
+echo "export JENKINS_HOME=/home/$USER/jenkins_home" >> .profile
+echo "export GITBUCKET_HOME=/home/$USER/gitbucket_home" >> .profile
 source ~/.profile
 
 # ==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==
@@ -93,6 +93,7 @@ ssh-keygen -t ed25519 -C "ravisankar.pandian@programmers.io" -f ~/.ssh/id_ed2551
 # Download Jenkins
 # ==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==
 mkdir -p ~/jenkins
+mkdir -p ~/jenkins_home
 cd ~/jenkins
 printheading "Download Jenkins..."
 wget --show-progress http://mirrors.jenkins.io/war-stable/latest/jenkins.war
@@ -101,6 +102,7 @@ wget --show-progress http://mirrors.jenkins.io/war-stable/latest/jenkins.war
 # Download GitBucket
 # ==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==
 mkdir -p ~/gitbucket
+mkdir -p ~/gitbucket_home
 cd ~/gitbucket
 printheading "Download GitBucket..."
 wget --show-progress https://github.com/gitbucket/gitbucket/releases/download/4.41.0/gitbucket.war
@@ -111,8 +113,12 @@ wget --show-progress https://github.com/gitbucket/gitbucket/releases/download/4.
 printheading "Install Service Commander..."
 yum install service-commander -y
 
-
-# scinit java -jar /home/CECUSER/jenkins.war --httpPort=9095
+# ==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==
+# Copy the Jenkins & GitBucket yml config file
+# ==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==
+printheading "Configure the jenkins yml file..."
+wget --show-progress https://raw.githubusercontent.com/ravisankar-PIO/gitonibmi/main/gitprompt.sh
+mv gitprompt.sh .gitprompt.sh
 
 echo -e "\n\n"
 echo -e '|============================================================|'
