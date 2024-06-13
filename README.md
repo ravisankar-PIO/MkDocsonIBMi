@@ -5,7 +5,9 @@
 ><h3> Table of Contents 
 </h3>
 
+```bash
 #PROMPT_COMMAND='__posh_git_ps1 "${VIRTUAL_ENV:+(`basename $VIRTUAL_ENV`)}\[\e[32m\]\u\[\e[0m\]@\h:\[\e[33m\]\w\[\e[0m\] " "\\\$ ";'$PROMPT_COMMANDexport PATH=/QOpenSys/pkgs/bin:/QOpenSys/pkgs/bin:/QOpenSys/usr/bin:/usr/ccs/bin:/QOpenSys/usr/bin/X11:/usr/sbin:.:/usr/bin
+```
 # Pre-Requisites
 - Install gcc*, python and it's related packages using the below command
   ```bash
@@ -53,6 +55,26 @@
   pip3 install mkdocs-material
   ```
   <br>
+
+1)	Installed gcc* via yum
+2)	Installed python3-devel python3-pip
+3)	Installed mkdocs via pip
+4)	Installed material theme (via pip) and did customization
+Installation - Material for MkDocs (squidfunk.github.io)
+Pip3 install mkdocs-material
+5)	Check the mkdocs.yml file 
+6)	ADDENVVAR ‘QIBM_MULTI_THREADED’ ‘Y’
+
+cd /
+
+mkdocs new docproject
+
+cd /docproject && mkdocs serve --dev-addr=0.0.0.0:8556
+	source /docproject/python-modules/bin/activate
+	nohup cd /docproject && nohup mkdocs serve --dev-addr=0.0.0.0:8555
+
+source /home/RAVISANKAR/mydoc/pyfiles/bin/activate && cd /home/RAVISANKAR/mydoc/docproject && 
+
 
 - 
 
