@@ -8,9 +8,9 @@
 
 ## Why Should You Care?
 - **Simplicity**: MKDocs keeps things straightforward. You write your documentation in Markdown, and it handles the rest. This is what you type. 
-![alt text](screenshots/wys.png)
+![alt text](screenshots/WYS.png)
 And this is what you get
-![alt text](screenshots/wyg.png)
+![alt text](screenshots/WYG.png)
 
 
 - **Modern Look**: It generates sleek, modern web pages that users will love. 
