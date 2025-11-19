@@ -300,19 +300,6 @@ Ensures customer data meets business rules before allowing transactions.
 2. Customer status must be 'A' (Active)
 3. Credit limit must be > 0
 
-## Example Usage
-```
-dcl-pr ValidateCustomer;
-  custNo char(10);
-  validFlag char(1);
-end-pr;
-
-ValidateCustomer(orderCust: isValid);
-if isValid = 'Y';
-  // Process order
-endif;
-```
-
 ```
 
 Just for illustration purpose, I replaced the content of the `index.md` with the above example. After saving the file, my website got refreshed and it looked like below. 
