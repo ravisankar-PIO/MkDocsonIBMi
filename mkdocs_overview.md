@@ -7,14 +7,14 @@
 - Imagine it as a magic wand that turns your plain text into a polished, user-friendly documentation portal.
 
 ## Why Should You Care?
-- **Simplicity**: MKDocs keeps things straightforward. You write your documentation in Markdown, and it handles the rest.
-![alt text](image-1.png)
-![alt text](image-2.png)
+- **Simplicity**: MKDocs keeps things straightforward. You write your documentation in Markdown, and it handles the rest. This is what you type. 
+![alt text](screenshots/wys.png)
+And this is what you get
+![alt text](screenshots/wyg.png)
 
 
 - **Modern Look**: It generates sleek, modern web pages that users will love. 
-  The below [website](https://www.mkdocs.org/user-guide/writing-your-docs/) is created using MKDocs
-  ![alt text](image.png)
+  You don't have to take my word for it. See for yourself. This [website](https://www.mkdocs.org/user-guide/writing-your-docs/) is created only using MKDocs with simple markdown text content.
 - **No Database/Web Server**: No database required. And technically no web server either since the build option creates a static, standalone HTML site.
 - **Material Theme**: It uses the Material for MkDocs theme, which makes your documentation look good without any extra effort. This theme is used by popular projects like Typer CLI and FastAPI.
 
@@ -31,7 +31,7 @@ Build: Run MKDocs to build your documentation.
 Too Lazy to build? Don't worry, you can even create a live server and design on the go (like wordpress)
 Host: Put your shiny new docs on GitHub Pages or any other hosting service.
 
-## Installation Steps:
+## Installation Steps (Overview):
 1. Set PATH variable to locate Open-Source packages
 ```
 PATH=/QOpenSys/pkgs/bin:/QOpenSys/usr/bin:/usr/ccs/bin:/QOpenSys/usr/bin/X11:/usr/sbin:.:/usr/bin
@@ -74,7 +74,7 @@ MKDocs is perfect for creating an internal documentation portal within your orga
 - Document common issues, solutions, and FAQs.
 - Include code snippets, diagrams, and step-by-step instructions.
 
-### 3. Collaborative Documentation Efforts: (For iA tool)
+### 3. Collaborative Documentation Efforts: (For Documenting any application)
 - MKDocs allows multiple contributors to work on the same documentation.
 - Use Git or other version control systems to collaborate.
 - Review, edit, and improve documentation collectively.
@@ -83,8 +83,5 @@ MKDocs is perfect for creating an internal documentation portal within your orga
 **MKDocs simplifies the process of creating static websites, making it an excellent choice for various documentation needs on IBM i. Whether it’s for APIs, SOPs, or cross-team knowledge, MKDocs streamlines information sharing.**
 
 
-## References
-- https://www.mkdocs.org - MKDocs website
-- https://github.com/mkdocs/catalog - Awesome curated collection of MKDocs plugins, themes and everything else.
-- https://squidfunk.github.io/mkdocs-material/getting-started/ - A really good material design based theme and elements. A powerhouse of customization.
+
 
